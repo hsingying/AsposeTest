@@ -147,10 +147,13 @@ namespace ILHG_TEST.Controllers
             {
                 Row row = new Row(doc);
                 List list = doc.Lists.Add(ListTemplate.NumberDefault);
-                //ListLevel level = list.ListLevels[0];
-                //Style style = doc.Styles.Add(StyleType.List, "listStyle");
-                //style.ListFormat.List = doc.Lists.Add(ListTemplate.NumberDefault);
-                //style.ListFormat.ListLevelNumber = 0;
+                // 標號都一樣 壹 QQ
+                list.ListLevels[0].Font.Color = Color.Red;
+                list.ListLevels[0].Font.Size = 24;
+                list.ListLevels[0].NumberStyle = NumberStyle.SimpChinNum2;
+                list.ListLevels[0].StartAt = 1;
+                //list.ListLevels[0].NumberFormat = "\x0000";
+                //level1.NumberFormat = "\x0000";
                 table.AppendChild(row);
                 for(int j = 0; j < 4; j++) // 欄位數量 (foreach
                 {
@@ -165,11 +168,13 @@ namespace ILHG_TEST.Controllers
                     // 寫入儲存格內容
                     if (j == 0)
                     {
-                        p.ParagraphFormat.Style = style;
+                        //p.ListFormat.ListIndent();
+                        p.ListFormat.List = list;
+                        
                     }
                     string text = "123";
                     
-                    p.ListFormat.ListIndent();
+                   
                     cell.FirstParagraph.AppendChild(new Run(doc, text));
 
                 }
@@ -189,7 +194,7 @@ namespace ILHG_TEST.Controllers
         private void SetTableBorder(Table table)
         {
             table.ClearBorders();
-            table.AutoFit(AutoFitBehavior.AutoFitToContents);
+            //table.AutoFit(AutoFitBehavior.AutoFitToContents);
             table.SetBorder(BorderType.Left, LineStyle.Single, 1.5, Color.Black, true);
             table.SetBorder(BorderType.Right, LineStyle.Single, 1.5, Color.Black, true);
             table.SetBorder(BorderType.Top, LineStyle.Single, 1.5, Color.Black, true);
