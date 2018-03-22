@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div> 
+        <p><button id="printBtn" onclick="PrintOnClick()">下載</button></p>
+    </div>
+    <div>
+        <p></p><button id="printBtn2" onclick="PrintDocWithTable()">下載(table)</button></p>
+    </div>
+    <div>
+        <p></p><button id="printBtn2" onclick="PrintMergeColumnTable()">下載(table)</button></p>
+    </div>
+</body>
+</html>
+<script>
+    function PrintOnClick() {
+        $.ajax({
+            url: '@Url.Action("Print","Sample")',
+            type: 'post',
+
+        })
+    }
+    function PrintDocWithTable() {
+        $.ajax({
+            url: '@Url.Action("PrintDocWithTable","Sample")',
+            type: 'post',
+
+        })
+    }
+    function PrintMergeColumnTable() {
+        $.ajax({
+            url: '@Url.Action("PrintMergeColumnTable", "Sample")',
+            type: 'post',
+
+        })
+
+    }
+</script>
+
